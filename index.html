@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BinWinWinW — Développeur web spécialisé en PHP, JavaScript et MySQL</title>
+  <meta
+    name="description"
+    content="Portfolio de BinWinWinW, Développeur web spécialisé en PHP, JavaScript et MySQL, spécialisé en applications web utiles, performantes et bien pensées."
+  />
+  <meta property="og:title" content="BinWinWinW — Développeur web spécialisé en PHP, JavaScript et MySQL" />
+  <meta
+    property="og:description"
+    content="Applications web, plateformes éducatives, outils métiers et solutions techniques robustes."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://binwinwinw.pe.hu/portfolio/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BinWinWinW — Développeur web" />
+  <meta name="twitter:description" content="Applications web, plateformes éducatives, outils métiers et solutions techniques robustes." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-soft: #121923;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel-strong: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f3f7fb;
+      --muted: #a8b3c2;
+      --accent: #2dd4bf;
+      --accent-2: #14b8a6;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(45, 212, 191, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, #0b1016 0%, #0d1117 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.02em;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      background: rgba(8, 12, 18, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(45,212,191,0.25), rgba(20,184,166,0.08));
+      border: 1px solid rgba(45, 212, 191, 0.28);
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header-cta {
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.28);
+      background: rgba(45, 212, 191, 0.1);
+      color: #d7fffa;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .header-cta:hover {
+      background: rgba(45, 212, 191, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .header-github {
+      padding: 0.55rem 0.85rem;
+      font-size: 0.88rem;
+    }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin-top: 1.25rem;
+      font-size: clamp(2.6rem, 5vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+    }
+
+    .hero-copy h1 span {
+      color: var(--accent);
+    }
+
+    .hero-copy p {
+      margin-top: 1.4rem;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 48px;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #062b27;
+      box-shadow: 0 12px 30px rgba(45, 212, 191, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(45, 212, 191, 0.28);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      border-radius: 20px;
+      padding: 1.25rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .code-preview {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.92rem;
+      color: #d7e4f3;
+      background: #0a0f15;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1.2rem;
+      overflow-x: auto;
+    }
+
+    .mini-kpis {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .mini-kpi {
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mini-kpi strong {
+      display: block;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-kpi span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 2rem 0 5rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 2vw, 2.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .about-panel .section-title,
+    .contact-panel .section-title {
+      margin-top: 1rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    /* Base Card Component (DRY) */
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: 28px;
+      padding: 1.4rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      padding: 1.35rem;
+      border-radius: 22px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    @media (hover: hover) {
+      .project-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(45, 212, 191, 0.45);
+      }
+    }
+
+    .project-card:focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(45, 212, 191, 0.45);
+    }
+
+    .projects-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    .more-projects-link {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-family: 'Space Mono', monospace;
+      transition: color 0.2s ease;
+    }
+
+    .more-projects-link:hover,
+    .more-projects-link:focus-visible {
+      color: var(--accent);
+      outline: none;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      max-width: 36ch;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.25rem;
+    }
+
+    .tag {
+      padding: 0.42rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.09);
+      border: 1px solid rgba(45, 212, 191, 0.16);
+      color: #c5fffa;
+      font-size: 0.78rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.4rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .expertise-card {
+      padding: 1.2rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      box-shadow: none;
+    }
+
+    .expertise-card h3 {
+      margin-bottom: 0.65rem;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .expertise-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.2rem;
+    }
+
+    .about-panel,
+    .contact-panel {
+      padding: 1.5rem;
+      border-radius: 24px;
+    }
+
+    .about-panel p,
+    .contact-panel p {
+      color: var(--muted);
+      margin-top: 0.8rem;
+      max-width: 65ch;
+    }
+
+    .about-list {
+      margin-top: 1.2rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .about-list li {
+      list-style: none;
+      color: #dce7f5;
+      display: flex;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .about-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      transition: 0.2s ease;
+    }
+
+    .contact-chip:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .contact-chip-primary {
+      border-color: rgba(45, 212, 191, 0.38);
+      background: rgba(45, 212, 191, 0.12);
+      color: #d7fffa;
+      font-weight: 600;
+    }
+
+    .contact-chip-primary:hover {
+      background: rgba(45, 212, 191, 0.22);
+      border-color: rgba(45, 212, 191, 0.55);
+    }
+
+    .footer {
+      padding: 1.4rem 0 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-grid,
+      .projects-grid,
+      .expertise-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .expertise-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        min-height: 0;
+        padding: 1rem 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        gap: 0.85rem;
+      }
+
+      .hero {
+        padding-top: 3.6rem;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .projects-grid,
+      .expertise-grid,
+      .mini-kpis {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1 {
+        max-width: 100%;
+      }
+
+      .section-head {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand">
+        <div class="brand-mark">BW</div>
+        <div class="brand-text">
+          <strong>BinWinWinW</strong>
+          <span>Développeur web spécialisé en PHP, JavaScript et MySQL</span>
+          
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#projects">Projets</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-cta" href="mailto:contact@binwinwinw.pe.hu" aria-label="Envoyer un e-mail à contact@binwinwinw.pe.hu">
+          Contact ✉
+        </a>
+        <a class="contact-chip header-github" href="https://github.com/binwinwinw" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub de BinWinWinW (nouvelle fenêtre)">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Portfolio • applications web • IA • outils métiers</span>
+          <h1>
+            Je construis des produits web <span>utiles, robustes et clairs</span>
+          </h1>
+          <p>
+            Développeur web spécialisé en PHP, JavaScript et MySQL, je conçois des plateformes éducatives, des outils métiers
+            et des applications sur mesure avec un souci constant de structure, performance,
+            accessibilité et maintenabilité.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Voir les projets</a>
+            <a href="#contact" class="btn btn-secondary">Discuter d’un projet</a>
+          </div>
+        </div>
+
+        <aside class="hero-card card" aria-label="Aperçu développeur">
+          <div class="hero-panel">
+            <div class="panel-top">
+              <span>stack.js</span>
+              <span>production mindset</span>
+            </div>
+            <pre class="code-preview"><code>const profile = {
+  name: "BinWinWinW",
+  focus: ["Éducation", "Web apps", "IA intégrée"],
+  stack: ["PHP", "JavaScript", "MySQL", "Docker"],
+  priorities: ["Clarté", "Sécurité", "Performance"]
+};</code></pre>
+
+            <div class="mini-kpis">
+              <div class="mini-kpi">
+                <strong>11+</strong>
+                <span>projets aboutis</span>
+              </div>
+              <div class="mini-kpi">
+                <strong>Full-stack</strong>
+                <span>frontend, backend, data</span>
+              </div>
+              <div class="mini-kpi">
+                <strong>Édu / métier</strong>
+                <span>produits orientés usage réel</span>
+              </div>
+              <div class="mini-kpi">
+                <strong>Martinique</strong>
+                <span>collaboration à distance possible</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Sélection de travaux</span>
+            <h2 class="section-title">Projets mis en avant</h2>
+          </div>
+          <p>
+            Une sélection de produits construits avec une logique simple :
+            résoudre un vrai besoin avec une interface propre et une architecture durable.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card card">
+            <div>
+              <div class="project-meta">
+                <span>Plateforme éducative</span>
+                <span>PHP • JS • MySQL</span>
+              </div>
+              <h3>MonCoachScolaire</h3>
+              <p>
+                Plateforme pédagogique pensée pour accompagner les élèves, les contenus,
+                les exercices, les quiz et la progression dans un cadre structuré.
+              </p>
+              <div class="tags">
+                <span class="tag">Éducation</span>
+                <span class="tag">Dashboard</span>
+                <span class="tag">Base de données</span>
+              </div>
+            </div>
+            <a href="https://moncoachscolaire.fr/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Voir le projet MonCoachScolaire (nouvelle fenêtre)">Voir le projet ↗</a>
+          </article>
+
+          <article class="project-card card">
+            <div>
+              <div class="project-meta">
+                <span>Outil de gestion</span>
+                <span>React • Node.js • MySQL</span>
+              </div>
+              <h3>GestionEPN</h3>
+              <p>
+                Outil de gestion conçu pour des espaces numériques publics, avec un accent
+                sur l’organisation, le suivi et la clarté des flux d’utilisation.
+              </p>
+              <div class="tags">
+                <span class="tag">Outil métier</span>
+                <span class="tag">Administration</span>
+                <span class="tag">UX claire</span>
+              </div>
+            </div>
+            <a href="https://binwinwinw.pe.hu/gestionepn/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Voir le projet GestionEPN (nouvelle fenêtre)">Voir le projet ↗</a>
+          </article>
+
+          <article class="project-card card">
+            <div>
+              <div class="project-meta">
+                <span>Utilitaire web</span>
+                <span>JavaScript • UI</span>
+              </div>
+              <h3>ConvertAll</h3>
+              <p>
+                Application utilitaire focalisée sur l’efficacité : transformer rapidement
+                des données ou formats avec une interface directe et sans friction.
+              </p>
+              <div class="tags">
+                <span class="tag">Productivité</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Tooling</span>
+              </div>
+            </div>
+            <a href="https://binwinwinw.pe.hu/convertall/landingpage.php" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Voir le projet ConvertAll (nouvelle fenêtre)">Voir le projet ↗</a>
+          </article>
+        </div>
+
+        <div class="projects-footer">
+          <a href="https://github.com/binwinwinw?tab=repositories" class="more-projects-link" target="_blank" rel="noopener noreferrer" aria-label="Voir les 8 autres projets sur GitHub (nouvelle fenêtre)">
+            Voir les 8 autres projets sur GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Compétences</span>
+            <h2 class="section-title">Expertise technique</h2>
+          </div>
+          <p>
+            Des choix techniques orientés stabilité, lisibilité du code et capacité à faire évoluer les produits dans le temps.
+          </p>
+        </div>
+
+        <div class="expertise-grid">
+          <div class="expertise-card card">
+            <h3>Frontend</h3>
+            <p>Interfaces responsives, hiérarchie visuelle, composants clairs, JavaScript moderne, React et intégration propre.</p>
+          </div>
+          <div class="expertise-card card">
+            <h3>Backend</h3>
+            <p>PHP, Node.js, architecture métier, gestion des rôles, logique applicative solide et APIs adaptées au besoin réel.</p>
+          </div>
+          <div class="expertise-card card">
+            <h3>Données</h3>
+            <p>MySQL, structuration des contenus, relations cohérentes, performance des requêtes et intégrité fonctionnelle.</p>
+          </div>
+          <div class="expertise-card card">
+            <h3>Déploiement</h3>
+            <p>Docker, maintenance, versioning, rigueur de production et vision pragmatique de la mise en ligne.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-panel card">
+          <span class="eyebrow">À propos</span>
+          <h2 class="section-title">
+            Une approche produit avant tout
+          </h2>
+          <p>
+            Je m’intéresse autant à la structure de l’information et à la logique d’usage
+            qu’au code lui-même. Mon objectif n’est pas seulement de “faire fonctionner”,
+            mais de rendre l’outil compréhensible, fiable et agréable à utiliser.
+          </p>
+          <ul class="about-list">
+            <li>Construire des interfaces plus lisibles que démonstratives</li>
+            <li>Créer des architectures simples à maintenir</li>
+            <li>Rester attentif à la sécurité, l’accessibilité et la performance</li>
+            <li>Développer des produits alignés sur des besoins concrets</li>
+          </ul>
+        </div>
+
+        <div class="contact-panel card" id="contact">
+          <span class="eyebrow">Contact</span>
+          <h2 class="section-title">
+            Parlons de votre prochain projet
+          </h2>
+          <p>
+            Si vous cherchez un développeur capable de transformer une idée en application
+            exploitable, je peux intervenir sur la conception, le développement et la structuration du produit.
+          </p>
+
+          <div class="contact-links">
+            <a class="contact-chip contact-chip-primary" href="mailto:contact@binwinwinw.pe.hu" aria-label="Envoyer un e-mail à contact@binwinwinw.pe.hu">✉ contact@binwinwinw.pe.hu</a>
+            <a class="contact-chip" href="https://github.com/binwinwinw" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub de BinWinWinW (nouvelle fenêtre)">GitHub ↗</a>
+            <a class="contact-chip" href="https://binwinwinw.pe.hu/" target="_blank" rel="noopener noreferrer" aria-label="Site principal (nouvelle fenêtre)">Site principal ↗</a>
+            <a class="contact-chip" href="https://binwinwinw.pe.hu/portfolio/" target="_blank" rel="noopener noreferrer" aria-label="Portfolio détaillé (nouvelle fenêtre)">Portfolio détaillé ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 BinWinWinW — Développeur full-stack</p>
+      <p>Applications web • outils métiers • plateformes éducatives</p>
+    </div>
+  </footer>
+</body>
+</html>

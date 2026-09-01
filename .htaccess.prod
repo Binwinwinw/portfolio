@@ -1,0 +1,63 @@
+# ========================================
+# .htaccess PRODUCTION - Portfolio + projets racine
+# ========================================
+
+Options -Indexes
+DirectoryIndex index.php index.html
+
+# --- Sécurité fichiers sensibles ---
+<FilesMatch "(?i)(^\.|\.env|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml|.*\.(sql|sqlite|db|bak|backup|tmp|temp|log|conf|ini|yml|yaml))$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # --- HTTPS ---
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # --- Bloquer seulement les vrais dossiers techniques ---
+    RewriteRule ^(\.git|\.github|node_modules|vendor|src|private_uploads|logs|tmp)(/|$) - [F,L,NC]
+
+    # --- Laisser passer tout fichier ou dossier existant ---
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # --- Sinon fallback vers le portfolio principal ---
+    RewriteRule ^ index.html [L,QSA]
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/html "access plus 1 day"
+    ExpiresByType application/json "access plus 1 hour"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|eot)$">
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # CSP plus tolérante pour projets frontend variés
+    Header always set Content-Security-Policy "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:; img-src 'self' data: blob: https:; connect-src 'self' https: ws: wss:; frame-ancestors 'self';"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
